@@ -1,3 +1,5 @@
+<img src=https://media.cntraveler.com/photos/57222730a1d0c8fd663d4427/16:9/w_2240,c_limit/spirit-airlines-plane-GettyImages-103944389.jpg>
+
 # Разработка ML сервиса: от идеи к прототипу
 Материалы к онлайн-интенсиву ["Разработка ML сервиса: от идеи к прототипу"](https://stepik.org/course/176820/promo)
 
