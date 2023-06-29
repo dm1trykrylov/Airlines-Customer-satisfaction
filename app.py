@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 
+
 def process_main_page():
     show_main_page()
     show_form()
@@ -19,36 +20,43 @@ def show_main_page():
 
 
 def show_form():
-    """
-    st.markdown(\"\"\"
-    <style>
-    .stRadio [role=radiogroup]{
-        align:center;
-        align-items: center;
-        justify-content: center;
-    }
-    </style\"\"\"
-, unsafe_allow_html=True)
-    """
+    show_radio_buttons()
+
+        
+def show_radio_buttons():
+    radio_features = ['Inflight wifi service', 'Departure/Arrival time convenient',
+                      'Ease of Online booking', 'Gate location', 'Food and drink', 
+                      'Online boarding', 'Seat comfort', 'Inflight entertainment',
+                      'On-board service', 'Leg room service', 'Baggage handling',
+                      'Checkin service', 'Inflight service', 'Cleanliness']
+    num_radio_buttons = len(radio_features)
+    num_radio_cols = 2
+    buttons_per_column = int(np.ceil(num_radio_buttons / num_radio_cols))
     
-    with st.form("my_form"):
-        cols_count = 5
-        columns = st.columns(cols_count)
+    with st.form("customer_form"):
+        
+        #
+        age = st.slider("Age",min_value=1, max_value=100, value=20,
+                            step=1)
+        columns = st.columns(num_radio_cols)
         st.write("Inside the form")
-        values =[0] * cols_count
-        for i in range(cols_count):
-            with columns[i]:
+        values = [0] * num_radio_buttons
+        for i, label in enumerate(radio_features):
+            with columns[i // buttons_per_column]:
                 values[i] = st.radio(
-                    "Set label visibility 👇",
+                    f"{label}",
                     ["skip", "1", "2", "3", "4", "5"],
                     key=i,
                     horizontal=True
                 )
+        
+        gender = st.selectbox("Gender", ("Male", "Female"))
         # Every form must have a submit button.
+        
+
         submitted = st.form_submit_button("Submit")
         if submitted:
             st.write("slider", values)
-
 
 if __name__ == "__main__":
     process_main_page()
