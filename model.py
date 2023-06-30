@@ -9,11 +9,9 @@ def encode_features(df: pd.DataFrame) -> pd.DataFrame:
     Кодировка категориальных признаков и масштабирование
     """
     encoderfile = 'encoder.sav'
-    with open('models/' + encoderfile, 'rb') as f:
-        # Используется кодировщик, обученный на данных из датасета
-        ordinal_encoder = pickle.load(f)
-        ordinal_columns = ['Customer Type', 'Class', 'Gender']
-        df[ordinal_columns] = ordinal_encoder.transform(df[ordinal_columns])
+    ordinal_encoder = load_encoder('models/' + encoderfile)
+    ordinal_columns = ['Customer Type', 'Class', 'Gender']
+    df[ordinal_columns] = ordinal_encoder.transform(df[ordinal_columns])
     df = pd.get_dummies(data=df, prefix=['Travel'], columns=['Type of Travel'])
     if not ('Travel_Business travel' in df.columns):
         df['Travel_Business travel'] = [0]
@@ -21,11 +19,25 @@ def encode_features(df: pd.DataFrame) -> pd.DataFrame:
     else:
         df['Travel_Personal Travel'] = [0]
     scalerfile = 'scaler.sav'
-    with open('models/' + scalerfile, 'rb') as f:
+    scaler = load_scaler('models/' + scalerfile)
+    df = pd.DataFrame(scaler.transform(df), columns=df.columns)
+    return df
+
+
+@st.cache_data
+def load_encoder(path):
+    with open(path, 'rb') as f:
+        # Используется кодировщик, обученный на данных из датасета
+        encoder = pickle.load(f)
+    return encoder
+
+
+@st.cache_data
+def load_scaler(path):
+    with open(path, 'rb') as f:
         # Используется масштабирование с обучением на датасете
         scaler = pickle.load(f)
-        df = pd.DataFrame(scaler.transform(df), columns=df.columns)
-    return df
+    return scaler
 
 
 def encode_radio_input(input: str) -> int:
@@ -57,15 +69,22 @@ def swap_columns(df, col1, col2):
 PATH_TO_MODEL = 'models/CatBoostClassifier.pickle'
 
 
+@st.cache_data
 def load_model_and_predict(df, path=PATH_TO_MODEL):
     """
     Загрузка обученной модели и получение предсказаний для пользовательских данных
     """
     df = encode_features(df)
-    st.write("Данные из анкеты после кодировки и масштабирования:",df.head())
+    st.write("Данные из анкеты после кодировки и масштабирования:", df.head())
     df.to_csv('test.csv')
+    model = load_model()
+    prediction = model.predict(df)
+    prediction_proba = model.predict_proba(df)
+    return prediction, prediction_proba
+
+
+@st.cache_data
+def load_model(path=PATH_TO_MODEL):
     with open(path, "rb") as f:
         model = pickle.load(f)
-        prediction = model.predict(df)
-        prediction_proba = model.predict_proba(df)
-    return prediction, prediction_proba
+    return model
