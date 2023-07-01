@@ -1,0 +1,74 @@
+{
+  "ru": {
+    "paragraphs": {
+      "title": "Предсказание удовлетворённости клиента авиакомпании перелётом :satisfied:",
+      "instructions" : "Заполните анкету :memo: о перелёте. Мы попробуем понять, понравился ли полёт.",
+      "satisfied":"Надеемся, Вам понравился перелёт! :sunglasses:",
+      "dissatisfied":"Сожалеем, что Вы остались недовольны  перелётом... :confused:",
+      "prediction": "Предсказание",
+      "probabilities":"Вероятности, которые показала наша модель:",
+      "raw_df":"Данные из анкеты:",
+      "encoded_df":"Данные из анкеты после кодировки и масштабирования:"
+    },
+    "features": {
+      "Gender": "Пол",
+      "Age": "Возраст",
+      "Type of Travel": "Цель полёта",
+      "Class": "Класс",
+      "Customer Type": "Отношение к авиакомпании",
+      "Flight Distance": "Дальность полёта",
+      "Departure Delay in Minutes": "Задержка вылета в минутах",
+      "Arrival Delay in Minutes": "Задержка прилёта в минутах",
+      "Inflight wifi service": "Качество Wi-Fi в полёте",
+      "Departure/Arrival time convenient": "Удобство времени рейса",
+      "Ease of Online booking": "Качество системы онлайн бронирования",
+      "Gate location": "Расположение выходов на посадку",
+      "Food and drink": "Еда и напитки в полёте",
+      "Online boarding": "Онлайн регистрация",
+      "Seat comfort": "Удобство кресел",
+      "Inflight entertainment": "Развлечения в полёте",
+      "On-board service": "Качество обслуживания во время рейса",
+      "Leg room service": "Пространство для ног в салоне",
+      "Baggage handling": "Доставка багажа :baggage_claim:",
+      "Checkin service": "Регистрация в аэропорту",
+      "Inflight service": "Дополнительные услуги во время полёта",
+      "Cleanliness": "Чистота в салоне"
+    }
+  },
+  "en": {
+    "paragraphs": {
+      "title":"Airline Customer Satisfaction :satisfied:",
+      "instructions":"Please fill the form below :memo:. We will try to guess if you enjoyed the flight.",
+      "satisfied":"We hope you enjoyed the flight! :sunglasses:",
+      "dissatisfied":"We’re sorry you were unhappy with the flight... :confused:",
+      "prediction":"Our Prediction",
+      "probabilities":"Our ML model predicted these probabilities:",
+      "raw_df":"Data from your response:",
+      "encoded_df":"Encoded and scaled data:"
+    },
+    "features": {
+      "Gender": "Gender",
+      "Age": "Age",
+      "Type of Travel": "Type of Travel",
+      "Class": "Class",
+      "Customer Type": "Customer Type",
+      "Flight Distance": "Flight Distance",
+      "Departure Delay in Minutes": "Departure Delay in Minutes",
+      "Arrival Delay in Minutes": "Arrival Delay in Minutes",
+      "Inflight wifi service": "Inflight wifi service",
+      "Departure/Arrival time convenient": "Departure/Arrival time convenient",
+      "Ease of Online booking": "Ease of Online booking",
+      "Gate location": "Gate location",
+      "Food and drink": "Food and drink",
+      "Online boarding": "Online boarding",
+      "Seat comfort": "Seat comfort",
+      "Inflight entertainment": "Inflight entertainment",
+      "On-board service": "On-board service",
+      "Leg room service": "Leg room service",
+      "Baggage handling": "Baggage handling :baggage_claim:",
+      "Checkin service": "Checkin service",
+      "Inflight service": "Inflight service",
+      "Cleanliness": "Cleanliness"
+    }
+  }
+}

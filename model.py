@@ -2,7 +2,10 @@ import pickle
 import pandas as pd
 import streamlit as st
 from sklearn.preprocessing import StandardScaler, LabelEncoder, OrdinalEncoder, MinMaxScaler
+import json
 
+LANG = 'ru'
+TRANSLATIONS_FILE = 'translations.json'
 
 def encode_features(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -25,7 +28,7 @@ def encode_features(df: pd.DataFrame) -> pd.DataFrame:
 
 
 @st.cache_data
-def load_encoder(path):
+def load_encoder(path: str):
     with open(path, 'rb') as f:
         # Используется кодировщик, обученный на данных из датасета
         encoder = pickle.load(f)
@@ -33,7 +36,7 @@ def load_encoder(path):
 
 
 @st.cache_data
-def load_scaler(path):
+def load_scaler(path: str):
     with open(path, 'rb') as f:
         # Используется масштабирование с обучением на датасете
         scaler = pickle.load(f)
@@ -70,13 +73,14 @@ PATH_TO_MODEL = 'models/CatBoostClassifier.pickle'
 
 
 @st.cache_data
-def load_model_and_predict(df, path=PATH_TO_MODEL):
+def load_model_and_predict(df: pd.DataFrame, lang: str, path=PATH_TO_MODEL):
     """
     Загрузка обученной модели и получение предсказаний для пользовательских данных
     """
     df = encode_features(df)
-    st.write("Данные из анкеты после кодировки и масштабирования:", df.head())
-    df.to_csv('test.csv')
+    with open(TRANSLATIONS_FILE, 'r') as f:
+       paragraphs = json.load(f)[lang]['paragraphs']
+    st.write(paragraphs['encoded_df'], df.head())
     model = load_model()
     prediction = model.predict(df)
     prediction_proba = model.predict_proba(df)
