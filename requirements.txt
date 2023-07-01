@@ -43,7 +43,9 @@ rich==13.4.2
 scikit-learn==1.2.2
 scipy==1.11.1
 six==1.16.0
+sklearn==0.0.post5
 smmap==5.0.0
+st-btn-select==0.1.2
 streamlit==1.24.0
 tenacity==8.2.2
 threadpoolctl==3.1.0
